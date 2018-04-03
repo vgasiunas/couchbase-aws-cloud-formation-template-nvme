@@ -226,7 +226,7 @@ def generateServer(license, serverVersion, group, rallyAutoScalingGroup):
         "services=" + servicesParameter + "\n",
         "stackName=", { "Ref": "AWS::StackName" }, "\n",
         "serverVersion=" + serverVersion + "\n",
-        "baseURL=https://github.com/vgasiunas/couchbase-aws-cloud-formation-template-nvme/master/scripts/\n",
+        "baseURL=https://raw.githubusercontent.com/vgasiunas/couchbase-aws-cloud-formation-template-nvme/master/scripts/\n",
         "wget ${baseURL}server.sh\n",
         "wget ${baseURL}util.sh\n",
         "chmod +x *.sh\n",
