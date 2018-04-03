@@ -226,7 +226,7 @@ def generateServer(license, serverVersion, group, rallyAutoScalingGroup):
         "services=" + servicesParameter + "\n",
         "stackName=", { "Ref": "AWS::StackName" }, "\n",
         "serverVersion=" + serverVersion + "\n",
-        "baseURL=https://raw.githubusercontent.com/couchbase-partners/amazon-cloud-formation-couchbase/master/scripts/\n",
+        "baseURL=https://github.com/vgasiunas/couchbase-aws-cloud-formation-template-nvme/master/scripts/\n",
         "wget ${baseURL}server.sh\n",
         "wget ${baseURL}util.sh\n",
         "chmod +x *.sh\n",
@@ -264,13 +264,6 @@ def generateServer(license, serverVersion, group, rallyAutoScalingGroup):
                     {
                         "DeviceName" : "/dev/xvda",
                         "Ebs" : { "DeleteOnTermination" : True }
-                    },
-                    {
-                        "DeviceName" : "/dev/sdk",
-                        "Ebs" : {
-                            "VolumeSize": dataDiskSize,
-                            "VolumeType": "gp2"
-                        }
                     }
                 ],
                 "UserData": {

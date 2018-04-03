@@ -2,14 +2,20 @@
 
 formatDataDisk ()
 {
-  DEVICE=/dev/sdk
+  DEVICE=/dev/nvme0n1
+  VGNAME=vgcbdata
+  LVNAME=lvcbdata
   MOUNTPOINT=/mnt/datadisk
 
+  pvcreate $DEVICE
+  vgcreate $VGNAME $DEVICE
+  lvcreate --name $LVNAME -l 100%FREE $VGNAME
+
   echo "Creating the filesystem."
-  mkfs -t ext4 ${DEVICE}
+  mkfs -t ext4 /dev/$VGNAME/$LVNAME
 
   echo "Updating fstab"
-  LINE="${DEVICE}\t${MOUNTPOINT}\text4\tdefaults,nofail\t0\t2"
+  LINE="/dev/mapper/${VGNAME}-${LVNAME}\t${MOUNTPOINT}\text4\tdefaults,nofail\t0\t2"
   echo -e ${LINE} >> /etc/fstab
 
   echo "Mounting the disk"
